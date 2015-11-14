@@ -9,7 +9,7 @@
     {
       "type": "virtualbox-iso",
       "guest_os_type": "Debian_64",
-      "disk_size": 6000,
+      "disk_size": 8192,
       "iso_url": "http://ftp.nz.debian.org/debian/dists/sid/main/installer-amd64/20151023/images/netboot/mini.iso",
       "iso_checksum": "50195ffd9964790b9421b681c74a7dae",
       "iso_checksum_type": "md5",
