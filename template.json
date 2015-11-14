@@ -1,0 +1,54 @@
+{
+  "variables": {
+    "fullname": "Vagrant",
+    "username": "vagrant",
+    "password": "vagrant"
+  },
+
+  "builders": [
+    {
+      "type": "virtualbox-iso",
+      "guest_os_type": "Debian_64",
+      "disk_size": 6000,
+      "iso_url": "http://ftp.nz.debian.org/debian/dists/sid/main/installer-amd64/20151023/images/netboot/mini.iso",
+      "iso_checksum": "50195ffd9964790b9421b681c74a7dae",
+      "iso_checksum_type": "md5",
+      "http_directory": "http",
+      "ssh_username": "{{user `username`}}",
+      "ssh_password": "{{user `password`}}",
+      "ssh_wait_timeout": "40m",
+      "shutdown_command": "echo '{{user `password`}}' | sudo -S halt -p",
+      "headless": true,
+      "boot_wait": "5s",
+      "boot_command": [
+        "<esc><wait>",
+        "auto url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg ",
+        "passwd/user-fullname={{user `fullname`}} ",
+        "passwd/username={{user `username`}} ",
+        "passwd/user-password={{user `password`}} ",
+        "passwd/user-password-again={{user `password`}} ",
+        "<enter>"
+      ]
+    }
+  ],
+
+  "provisioners": [
+    {
+      "type": "shell",
+      "scripts": [
+        "scripts/vagrant.sh",
+        "scripts/virtualbox.sh",
+        "scripts/zerodisk.sh"
+      ],
+      "execute_command": "echo '{{user `password`}}' | {{ .Vars }} sudo -E -S sh '{{ .Path }}'"
+    }
+  ],
+
+  "post-processors": [
+    {
+      "type": "vagrant",
+      "output": "packer_debian-unstable_{{.Provider}}.box",
+      "keep_input_artifact": true
+    }
+  ]
+}
