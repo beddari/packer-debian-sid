@@ -4,11 +4,11 @@
 if test -f /etc/init.d/virtualbox-ose-guest-utils; then
     /etc/init.d/virtualbox-ose-guest-utils stop
     rmmod vboxguest
-    aptitude -y purge virtualbox-ose-guest-x11 virtualbox-ose-guest-dkms virtualbox-ose-guest-utils
+    apt-get remove -y virtualbox-ose-guest-x11 virtualbox-ose-guest-dkms virtualbox-ose-guest-utils
 fi
 
 # Install dependencies
-aptitude -y install --without-recommends linux-headers-amd64 dkms bzip2
+apt-get install -y linux-headers-amd64 dkms bzip2
 
 # Install the VirtualBox guest additions
 VBOX_ISO=VBoxGuestAdditions.iso

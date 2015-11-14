@@ -18,6 +18,9 @@ wget --no-check-certificate 'https://raw.github.com/mitchellh/vagrant/master/key
 chmod 600 /home/$SUDO_USER/.ssh/authorized_keys
 chown -R $SUDO_USER /home/$SUDO_USER/.ssh
 
+# Vagrant nfs
+mkdir /vagrant
+
 # Fix grub timeout
 sed -i 's/GRUB_TIMEOUT.*/GRUB_TIMEOUT=0/' /etc/default/grub
 grub-mkconfig
