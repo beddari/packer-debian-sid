@@ -1,18 +1,18 @@
 {
   "variables": {
-    "fullname": "Vagrant",
+    "fullname": "Vagrant user",
     "username": "vagrant",
     "password": "vagrant"
   },
 
   "builders": [
     {
-      "type": "virtualbox-iso",
-      "guest_os_type": "Debian_64",
+      "type": "qemu",
+      "format": "qcow2",
+      "accelerator": "kvm",
       "disk_size": 8192,
-      "iso_url": "http://ftp.nz.debian.org/debian/dists/sid/main/installer-amd64/20151023/images/netboot/mini.iso",
-      "iso_checksum": "50195ffd9964790b9421b681c74a7dae",
-      "iso_checksum_type": "md5",
+      "iso_url": "http://ftp.se.debian.org/debian/dists/sid/main/installer-amd64/current/images/netboot/mini.iso",
+      "iso_checksum_type": "none",
       "http_directory": "http",
       "ssh_username": "{{user `username`}}",
       "ssh_password": "{{user `password`}}",
